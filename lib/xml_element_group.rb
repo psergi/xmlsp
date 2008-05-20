@@ -1,5 +1,5 @@
 module XMLSP
-	class XMLSP::XMLElementGroup
+	class XMLElementGroup
 		attr_accessor :elements, :tag, :parent
 		
 		def initialize(tag)
