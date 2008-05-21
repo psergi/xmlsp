@@ -4,7 +4,7 @@ module XMLSP;end
 require 'rexml/document'
 require "rexml/streamlistener"
 
-require 'xml_element'
-require 'xml_element_group'
-require 'item_listener'
-require 'xml_stream_loader'
+require 'element'
+require 'element_group'
+require 'element_listener'
+require 'stream_loader'

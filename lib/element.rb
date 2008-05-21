@@ -1,5 +1,5 @@
 module XMLSP
-	class XMLElement
+	class Element
 		attr_accessor :children, :parent, :attributes, :value, :tag
 		
 		def initialize(tag)
@@ -11,14 +11,14 @@ module XMLSP
 		end
 		
 		def add_element(xml_element)
-		  return unless xml_element.is_a?(XMLElement)
+		  return unless xml_element.is_a?(Element)
 		  @children ||= {}
 		  if(@children[xml_element.tag].nil?)
 		    @children[xml_element.tag] = xml_element
-		  elsif(@children[xml_element.tag].is_a?(XMLElementGroup))
+		  elsif(@children[xml_element.tag].is_a?(ElementGroup))
 		    @children[xml_element.tag].add_element(xml_element)
 		  else
-		    xml_element_group = XMLElementGroup.new(xml_element.tag)
+		    xml_element_group = ElementGroup.new(xml_element.tag)
 		    xml_element_group.parent = self
 		    xml_element_group.add_element(@children[xml_element.tag])
 		    xml_element_group.add_element(xml_element)
@@ -27,8 +27,7 @@ module XMLSP
 		end
 		
 		def [](tag)
-			return nil unless is_parent?
-			return @children[tag]
+			return is_parent? ? @children[tag] : nil
 		end
 		
 		def inspect
