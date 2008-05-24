@@ -13,13 +13,13 @@ module XMLSP
 		def tag_start(tag, attrs)
 		  if(tag == @search_tag)
 		    @in_element = true
-		    @current_element = Element.new(tag)
+		    @current_element = Element.new(tag, attrs)
 		    @element = @current_element
 		    return
 		  end
 		  if(@in_element)
 		    @level += 1
-		      child_element = Element.new(tag)
+		      child_element = Element.new(tag, attrs)
 		      child_element.parent = @current_element
 		      @current_element.add_element(child_element)
 		      @current_element = child_element

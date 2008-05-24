@@ -2,8 +2,9 @@ module XMLSP
 	class Element
 		attr_accessor :children, :parent, :attributes, :value, :tag
 		
-		def initialize(tag)
+		def initialize(tag, attributes = {})
 		  @tag = tag
+		  @attributes = attributes
 		end
 		
 		def is_parent?
