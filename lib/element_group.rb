@@ -1,5 +1,7 @@
 module XMLSP
 	class ElementGroup
+		include Enumerable
+		
 		attr_accessor :elements, :tag, :parent
 		
 		def initialize(tag)
@@ -10,6 +12,10 @@ module XMLSP
 		def add_element(xml_element)
 			return unless xml_element.is_a?(Element)
 		  @elements << xml_element
+		end
+		
+		def each()
+			elements.each {|e| yield e}
 		end
 	end
 end
