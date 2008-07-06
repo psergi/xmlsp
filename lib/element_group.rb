@@ -17,5 +17,9 @@ module XMLSP
 		def each()
 			elements.each {|e| yield e}
 		end
+		
+		def [](i)
+			elements[i]
+		end
 	end
 end
