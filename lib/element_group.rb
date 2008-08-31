@@ -21,5 +21,9 @@ module XMLSP
 		def [](i)
 			elements[i]
 		end
+
+    def to_hash
+      {@tag => @elements.map { |e| e.value }}
+    end
 	end
 end

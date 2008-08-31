@@ -34,5 +34,18 @@ module XMLSP
 		def inspect
 			@value
 		end
+    
+    def to_hash
+      key = @tag
+      if(is_parent?)
+        value = {}
+        @children.each_value do |v|
+          value.merge!(v.to_hash)
+        end
+      else
+        value = @value
+      end
+      {key => value}
+    end
 	end
 end
