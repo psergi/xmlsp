@@ -83,9 +83,9 @@ describe XMLSP::ElementGroup do
   describe ".to_hash" do
     before(:each) do
       @element_group = XMLSP::ElementGroup.new("group")
-      @element = XMLSP::Element.new("group", "ok")
+      @element = XMLSP::Element.new("group", {}, "ok")
       @element2 = XMLSP::Element.new("group")
-      @element3 = XMLSP::Element.new("test", "not ok")
+      @element3 = XMLSP::Element.new("test", {}, "not ok")
       @element2.add_element(@element3)
       @element_group.add_element(@element)
       @element_group.add_element(@element2)

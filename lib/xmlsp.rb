@@ -7,7 +7,7 @@ require 'rexml/streamlistener'
 require 'xmlsp/element'
 require 'xmlsp/element_group'
 require 'xmlsp/element_listener'
-require 'xmlsp/stream_loader'
+require 'xmlsp/stream_parser'
 
 module XMLSP
 end

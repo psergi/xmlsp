@@ -37,12 +37,12 @@ describe XMLSP::Element do
     end
     it "should be able to set text when created" do
       text = "this text"
-      element = XMLSP::Element.new("name", text)
+      element = XMLSP::Element.new("name", {}, text)
       element.text.should == text
     end
     it "should be able to set attributes when created" do
       attrs = {:this => "that", :ok => "false"}
-      element = XMLSP::Element.new("name", "text", attrs)
+      element = XMLSP::Element.new("name", attrs, "text")
       element.attributes.should == attrs
     end
     it "should not have a parent by default" do
@@ -65,6 +65,10 @@ describe XMLSP::Element do
     it "should add child element to parent elements children" do
       @element.add_element(@child)
       @element.children["child"].should == @child
+    end
+    it "should set child's parent" do
+      @element.add_element(@child)
+      @child.parent.should == @element
     end
     it "should create element group of children with the same name" do
       @element.add_element(@child)
@@ -107,23 +111,26 @@ describe XMLSP::Element do
   describe ".to_hash" do
     before(:each) do
       @root = XMLSP::Element.new("root")
-      @child1 = XMLSP::Element.new("child", "child #1")
-      @child2 = XMLSP::Element.new("child", "child #2")
+      @child1 = XMLSP::Element.new("child", {}, "child #1")
+      @child2 = XMLSP::Element.new("child", {}, "child #2")
       @child3 = XMLSP::Element.new("child")
-      @grand_child = XMLSP::Element.new("grandchild", "grand child")
+      @grand_child = XMLSP::Element.new("grandchild", {}, "grand child")
+      @dog = XMLSP::Element.new("dog")
       @root.add_element(@child1)
       @root.add_element(@child2)
       @child3.add_element(@grand_child)
       @root.add_element(@child3)
+      @root.add_element(@dog)
     end
     it "should create a hash representation of the elements" do
       @root.to_hash.should == {
         "root" => {
-          "child" => ["child #1", "child #2", {"grandchild" => "grand child"}]}
+          "child" => ["child #1", "child #2", {"grandchild" => "grand child"}],
+          "dog" => nil}
         }
     end
     it "should work with a single element" do
-      XMLSP::Element.new("root", "this one").to_hash.should == {"root" => "this one"}
+      XMLSP::Element.new("root", {}, "this one").to_hash.should == {"root" => "this one"}
     end
     it "should work with a no text single element" do
       XMLSP::Element.new("root").to_hash.should == {"root" => nil}
