@@ -43,5 +43,12 @@ module XMLSP
       	@current_element.value = text
     	end
   	end
+
+    def cdata(content)
+      content.strip!
+      if(@in_element && !content.empty?)
+        @current_element.value = content
+      end
+    end
 	end
 end
