@@ -7,10 +7,6 @@ http://github.com/psergi/xmlsp
 
 XML Stream Parser for Ruby (REXML)
 
-== INSTALL:
-
-  $ gem install psergi-xmlsp --source=http://gems.github.com
-
 == LICENSE:
 
 (The MIT License)
